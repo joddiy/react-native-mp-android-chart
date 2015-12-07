@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/react-native-mp-android-chart/react-native-mp-android-chart.iml" filepath="$PROJECT_DIR$/react-native-mp-android-chart/react-native-mp-android-chart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rn_native_mp_chart.iml" filepath="$PROJECT_DIR$/rn_native_mp_chart.iml" />
+    </modules>
+  </component>
+</project>

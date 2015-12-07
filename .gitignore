@@ -25,3 +25,6 @@ proguard/
 
 # Log Files
 *.log
+
+# node_modules/react-native
+node_modules/react-native/
