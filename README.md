@@ -1,5 +1,5 @@
 # react-native-mp-android-chart
-Put the MPAndroidChart to react-natve
+Port the MPAndroidChart to react-natve
 
 Thanks
 -----
