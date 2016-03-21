@@ -17,7 +17,7 @@ git clone https://github.com/joddiy/react-native-mp-android-chart.git
 
 cd react-native-mp-android-chart
 
-npm install 
+npm install (maybe sometimes you need --unsafe-perm)
 ```
 
 
