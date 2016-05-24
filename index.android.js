@@ -5,13 +5,13 @@
 'use strict';
 
 var React = require('react-native');
-var MPChart = require('react-native-mp-android-chart');
 var {
   AppRegistry,
   StyleSheet,
   Text,
   View,
 } = React;
+import {MPChart} from 'react-native-mp-android-chart'
 
 
 var dataSource2 = {
@@ -151,7 +151,6 @@ var rn_mp_chart = React.createClass({
                          chartStyles={{"animateType":"Y","animateY":1500}}
                          yAxis={{'position':'LEFT'}}
                          xAxis={{'position':'BOTTOM'}}
-//					     legend={}
                     />
                     <MPChart style={styles.chart}
                          type={'bar'}
@@ -159,7 +158,6 @@ var rn_mp_chart = React.createClass({
                          chartStyles={{"animateType":"Y","animateY":1500}}
                          yAxis={{'position':'LEFT'}}
                          xAxis={{'position':'BOTTOM'}}
-//					     legend={}
                     />
           </View>
           <View style={styles.part}>
@@ -169,7 +167,6 @@ var rn_mp_chart = React.createClass({
                           chartStyles={{"animateType":"Y","animateY":1500}}
                           yAxis={{'position':'LEFT'}}
                           xAxis={{'position':'BOTTOM'}}
-                        //					 legend={}
                     />
                     <MPChart style={styles.chart}
                           type={'pie'}
@@ -177,7 +174,6 @@ var rn_mp_chart = React.createClass({
                           chartStyles={{"animateType":"Y","animateY":1500}}
                           yAxis={{'position':'LEFT'}}
                           xAxis={{'position':'BOTTOM'}}
-                          //					 legend={}
                     />
                    </View>
       </View>
