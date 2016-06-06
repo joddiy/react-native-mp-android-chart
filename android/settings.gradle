@@ -1,0 +1,3 @@
+rootProject.name = 'RnChartDemo'
+
+include ':app', ':mp_android_chart'

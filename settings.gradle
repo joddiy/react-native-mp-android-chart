@@ -1,4 +1,0 @@
-rootProject.name = 'rn_native_mp_chart'
-
-include ':app', ':react-native-mp-android-chart'
-
