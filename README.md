@@ -1,24 +1,6 @@
-# react-native-mp-android-chart
-Port the MPAndroidChart to react-natve
+I'll update the rn version of this project to 0.26.2 (maybe higher) in this branch.
 
-Thanks
------
-Thanks to the  [**MPAndroidChart**](https://github.com/PhilJay/MPAndroidChart)
-
-Demo
------
-![alt tag](https://github.com/joddiy/react-native-mp-android-chart/blob/master/screenshots/1.png)
-
-
-Getting Started
------
- ```gradle
-git clone https://github.com/joddiy/react-native-mp-android-chart.git
-
-cd react-native-mp-android-chart
-
-npm install (maybe sometimes you need --unsafe-perm)
-```
+But because the error has been reported is about jsx which is not my major, **SO** the progress may be slow, I hope you can understand it :D
 
 
 
