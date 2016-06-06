@@ -7,6 +7,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.ViewManager;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class MPAnroidChartPackage implements ReactPackage {
      */
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return null;
+        return Collections.emptyList();
     }
 
     /**
@@ -32,7 +33,7 @@ public class MPAnroidChartPackage implements ReactPackage {
      */
     @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return null;
+        return Collections.emptyList();
     }
 
     /**
@@ -41,6 +42,6 @@ public class MPAnroidChartPackage implements ReactPackage {
      */
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return null;
+        return Collections.emptyList();
     }
 }
