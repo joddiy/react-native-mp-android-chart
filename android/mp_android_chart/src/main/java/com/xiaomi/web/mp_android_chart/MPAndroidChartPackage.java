@@ -7,6 +7,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.ViewManager;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * author:       joddiy <joddiy@qq.com>
  * time:         2016/6/6 16:28
  */
-public class MPAnroidChartPackage implements ReactPackage {
+public class MPAndroidChartPackage implements ReactPackage {
     /**
      * @param reactContext react application context that can be used to create modules
      * @return list of native modules to register with the newly created catalyst instance
@@ -42,6 +43,8 @@ public class MPAnroidChartPackage implements ReactPackage {
      */
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+        return Arrays.<ViewManager>asList(
+                new MPAndroidBarChartManager()
+        );
     }
 }
