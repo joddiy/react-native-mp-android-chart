@@ -8,12 +8,9 @@ package com.xiaomi.web.mp_android_chart;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 
-import com.facebook.react.uimanager.BaseViewManager;
-import com.facebook.react.uimanager.ReactShadowNode;
+import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.facebook.react.uimanager.annotations.ReactPropGroup;
-import com.facebook.react.views.text.ReactTextShadowNode;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -25,9 +22,10 @@ import com.github.mikephil.charting.formatter.LargeValueFormatter;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
-public class MPAndroidBarChartManager extends BaseViewManager<BarChart, ReactTextShadowNode> {
+public class MPAndroidBarChartManager extends SimpleViewManager<BarChart>{
 
     /**
      * @return the name of this view manager. This will be the name used to reference this view
@@ -231,31 +229,6 @@ public class MPAndroidBarChartManager extends BaseViewManager<BarChart, ReactTex
     }
 
     /**
-     * This method should return a subclass of {@link ReactShadowNode} which will be then used for
-     * measuring position and size of the view. In mose of the cases this should just return an
-     * instance of {@link ReactShadowNode}
-     */
-    @Override
-    public ReactTextShadowNode createShadowNodeInstance() {
-        return new ReactTextShadowNode(false);
-    }
-
-    /**
-     * This method should return {@link Class} instance that represent type of shadow node that this
-     * manager will return from {@link #createShadowNodeInstance}.
-     * <p/>
-     * This method will be used in the bridge initialization phase to collect properties exposed using
-     * {@link ReactProp} (or {@link ReactPropGroup}) annotation from the {@link ReactShadowNode}
-     * subclass specific for native view this manager provides.
-     *
-     * @return {@link Class} object that represents type of shadow node used by this view manager.
-     */
-    @Override
-    public Class<? extends ReactTextShadowNode> getShadowNodeClass() {
-        return ReactTextShadowNode.class;
-    }
-
-    /**
      * Subclasses should return a new View instance of the proper type.
      *
      * @param reactContext
@@ -265,22 +238,4 @@ public class MPAndroidBarChartManager extends BaseViewManager<BarChart, ReactTex
         return  new BarChart(reactContext);
     }
 
-    /**
-     * Subclasses can implement this method to receive an optional extra data enqueued from the
-     * corresponding instance of {@link ReactShadowNode} in
-     * {@link ReactShadowNode#onCollectExtraUpdates}.
-     * <p/>
-     * Since css layout step and ui updates can be executed in separate thread apart of setting
-     * x/y/width/height this is the recommended and thread-safe way of passing extra data from css
-     * node to the native view counterpart.
-     * <p/>
-     * TODO(7247021): Replace updateExtraData with generic update props mechanism after D2086999
-     *
-     * @param root
-     * @param extraData
-     */
-    @Override
-    public void updateExtraData(BarChart root, Object extraData) {
-
-    }
 }
