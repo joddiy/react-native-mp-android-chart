@@ -15,7 +15,7 @@ import java.util.List;
  * author:       joddiy <joddiy@qq.com>
  * time:         2016/6/6 16:28
  */
-public class MPAndroidChartPackage implements ReactPackage {
+public class ChartPackage implements ReactPackage {
     /**
      * @param reactContext react application context that can be used to create modules
      * @return list of native modules to register with the newly created catalyst instance
@@ -44,7 +44,7 @@ public class MPAndroidChartPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.<ViewManager>asList(
-                new MPAndroidBarChartManager()
+                new MPAndroidBarChart()
         );
     }
 }

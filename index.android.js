@@ -12,59 +12,6 @@ import {
   View
 } from 'react-native';
 
-var dataSource2 = {
-    "entryCount": 5,
-    "setCount": 3,
-    "barType": "STACKED",
-    "xVals": [
-        "1990",
-        "1991",
-        "1992",
-        "1993",
-        "1994"
-    ],
-    "dataSets": [
-        {
-            "yVals": [
-                [
-                    33654.668,
-                    87116.97,
-                    59293.563
-                ],
-                [
-                    12311.668,
-                    34121.97,
-                    52323.563
-                ],
-                [
-                    55213.668,
-                    87682.97,
-                    67511.563
-                ],
-                [
-                    64612.668,
-                    47231.97,
-                    67341.563
-                ],
-                [
-                    51231.668,
-                    13467.97,
-                    85673.563
-                ]
-            ],
-            "labels": [
-                "A",
-                "B",
-                "C"
-            ],
-            "colors": [
-                "#4ebcda",
-                "#50c7a7",
-                "#dedede"
-            ]
-        }
-    ]
-};
 
 class RnChartDemo extends Component {
   render() {
@@ -73,12 +20,10 @@ class RnChartDemo extends Component {
 		<Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
-		<MPChart style={styles.chart}
-			 dataSource='{"entryCount":5,"setCount":3,"barType":"STACKED","xVals":["1990","1991","1992","1993","1994"],"dataSets":[{"yVals":[[33654.668,87116.97,59293.563],[12311.668,34121.97,52323.563],[55213.668,87682.97,67511.563],[64612.668,47231.97,67341.563],[51231.668,13467.97,85673.563]],"labels":["A","B","C"],"colors":["#4ebcda","#50c7a7","#dedede"]}]}'
-			 chartStyles='{"animateType":"Y","animateY":1500}'
-			 yAxis='{"position":"LEFT"}'
-			 xAxis='{"position":"BOTTOM"}'
-		/>
+		<MPChart style={styles.chart}/>
+		<Text style={styles.welcome}>
+          Welcome to React Native!
+        </Text>
 	</View>
     );
   }
@@ -93,8 +38,15 @@ const styles = StyleSheet.create({
   },
   chart : {
 	height : 250,
-	marginBottom:5
+	width : 1000,
+	marginBottom:5,
+
   },
+  welcome:{
+	height : 100,
+	width : 200,
+	backgroundColor: '#000000',
+  }
 });
 
 AppRegistry.registerComponent('RnChartDemo', () => RnChartDemo);

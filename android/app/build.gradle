@@ -122,7 +122,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
     compile 'com.facebook.react:react-native:0.26.3'
     compile project(':mp_android_chart')
 }
