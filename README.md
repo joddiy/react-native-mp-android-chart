@@ -1,6 +1,8 @@
 # react-native-mp-android-chart
 Port the MPAndroidChart to react-natve
 
+__the vesion worked in react-native 0.26.02 is the [branch](https://github.com/joddiy/react-native-mp-android-chart/tree/version_in_rn_0.26.2), it is not but will finish soon :D __
+
 Thanks
 -----
 Thanks to the  [**MPAndroidChart**](https://github.com/PhilJay/MPAndroidChart)
