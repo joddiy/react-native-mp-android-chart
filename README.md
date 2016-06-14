@@ -1,5 +1,5 @@
 - the vesion in rn-0.26.02 is developing.
-- the js of chart is int the dir: \node_modules\mp-android-chart
+- the js of chart is in the dir: \node_modules\mp-android-chart
 - you can easily to add a method of chart like this:
 in MPAndroidBarChart
 ``` java
