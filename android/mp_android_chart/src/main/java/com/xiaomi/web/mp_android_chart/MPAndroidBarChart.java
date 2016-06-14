@@ -5,6 +5,7 @@ package com.xiaomi.web.mp_android_chart;
  * time:         2016/6/6 18:10
  */
 
+import android.graphics.Color;
 import android.support.annotation.Nullable;
 
 import com.facebook.react.uimanager.SimpleViewManager;
@@ -18,7 +19,9 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -66,7 +69,7 @@ public class MPAndroidBarChart extends SimpleViewManager<BarChart> {
      * @param desc
      */
     @ReactProp(name = "description")
-    public void setDescription(BarChart mChart, @Nullable  String desc) {
+    public void setDescription(BarChart mChart, @Nullable String desc) {
         mChart.setDescription(desc);
     }
 
@@ -261,6 +264,102 @@ public class MPAndroidBarChart extends SimpleViewManager<BarChart> {
         mChart.getLegend().setXEntrySpace(space);
     }
 
+
+    private enum barTypes {
+        COMMON, STACKED
+    }
+    /**
+     * set datasource of chart
+     *
+     * @param mChart
+     * @param data_source
+     */
+    @ReactProp(name = "data_source")
+    public void setDataSource(BarChart mChart, String data_source) {
+        try {
+            JSONObject JSONObj = new JSONObject(data_source);
+
+            int mEntryCount = JSONObj.getInt("entryCount");
+
+            int mSetCount = JSONObj.getInt("setCount");
+
+            JSONArray xValsArray = JSONObj.getJSONArray("xVals");
+
+            ArrayList<String> xVals = new ArrayList<>();
+
+            for (int i = 0; i < mEntryCount; i++) {
+                xVals.add(xValsArray.getString(i));
+            }
+
+            JSONArray mDataSets = JSONObj.getJSONArray("dataSets");
+
+            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+
+//            ArrayList<BarDataSet> dataSets = new ArrayList<>();
+
+
+            String barType = JSONObj.optString("barType", "COMMON");
+
+            switch (barTypes.valueOf(barType)) {
+                case COMMON:
+                    for (int i = 0; i < mSetCount; i++) {
+                        JSONObject mDataSet = mDataSets.getJSONObject(i);
+                        JSONArray mYVals = mDataSet.getJSONArray("yVals");
+                        ArrayList<BarEntry> yValsTemp = new ArrayList<>();
+                        for (int j = 0; j < mEntryCount; j++) {
+                            yValsTemp.add(new BarEntry((float) mYVals.getDouble(j), j));
+                        }
+                        BarDataSet setTemp = new BarDataSet(yValsTemp, mDataSet.getString("label"));
+                        setTemp.setColor(Color.parseColor(mDataSet.getString("colors")));
+                        setTemp.setBarSpacePercent((float) JSONObj.optDouble("barSpace", 15));
+                        setTemp.setValueTextColor(Color.parseColor(mDataSet.optString("valueTextColor", "#000000")));
+                        setTemp.setValueTextSize((float) JSONObj.optDouble("valueTextSize", 10));
+                        dataSets.add(setTemp);
+                    }
+                    break;
+                case STACKED:
+                    JSONObject dataSet = mDataSets.getJSONObject(0);
+                    JSONArray mYVals = dataSet.getJSONArray("yVals");
+                    ArrayList<BarEntry> yValsTemp = new ArrayList<>();
+                    for (int i = 0; i < mEntryCount; i++) {
+                        JSONArray vals = mYVals.getJSONArray(i);
+                        float[] yValsStr = new float[mSetCount];
+                        for (int j = 0; j < mSetCount; j++) {
+                            yValsStr[j] = (float) vals.getDouble(j);
+                        }
+                        yValsTemp.add(new BarEntry(yValsStr, i));
+                    }
+                    BarDataSet set = new BarDataSet(yValsTemp, "");
+                    JSONArray label = dataSet.getJSONArray("labels");
+                    JSONArray color = dataSet.getJSONArray("colors");
+                    String[] labelStr = new String[mSetCount];
+                    int[] colorStr = new int[mSetCount];
+                    for (int i = 0; i < mSetCount; i++) {
+                        labelStr[i] = label.getString(i);
+                        colorStr[i] = Color.parseColor(color.optString(i));
+                    }
+                    set.setColors(colorStr);
+                    set.setStackLabels(labelStr);
+                    dataSets.add(set);
+                    break;
+            }
+
+            BarData data = new BarData(xVals, dataSets);
+
+            data.setGroupSpace((float) JSONObj.optDouble("entryCount", 80));
+
+            mChart.setData(data);
+//            mChart.animateY(2000);
+            mChart.setPinchZoom(false);
+            mChart.setDoubleTapToZoomEnabled(false);
+            mChart.invalidate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            mChart.clear();
+            mChart.setNoDataText("数据还在路上...");
+        }
+    }
+
     /**
      * Subclasses should return a new View instance of the proper type.
      *
@@ -276,53 +375,9 @@ public class MPAndroidBarChart extends SimpleViewManager<BarChart> {
         YAxis rightAxis = mChart.getAxisRight();
         rightAxis.setLabelCount(8, false);
 
-        setData(12, 50, mChart);
+//        setData(12, 50, mChart);
 
         return mChart;
     }
-
-    private void setData(int count, float range, BarChart mChart) {
-
-        ArrayList<String> xVals = new ArrayList<String>();
-        for (int i = 0; i < count; i++) {
-            xVals.add(mMonths[i % 12]);
-        }
-
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-
-        for (int i = 0; i < count; i++) {
-            float mult = (range + 1);
-            float val = (float) (Math.random() * mult);
-            yVals1.add(new BarEntry(val, i));
-        }
-
-        BarDataSet set1;
-
-        if (mChart.getData() != null &&
-                mChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) mChart.getData().getDataSetByIndex(0);
-            set1.setYVals(yVals1);
-            mChart.getData().setXVals(xVals);
-            mChart.getData().notifyDataChanged();
-            mChart.notifyDataSetChanged();
-        } else {
-            set1 = new BarDataSet(yVals1, "DataSet");
-            set1.setBarSpacePercent(35f);
-            set1.setColors(ColorTemplate.MATERIAL_COLORS);
-
-            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-            dataSets.add(set1);
-
-            BarData data = new BarData(xVals, dataSets);
-            data.setValueTextSize(10f);
-
-            mChart.setData(data);
-        }
-    }
-
-    protected String[] mMonths = new String[]{
-            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
-    };
-
 
 }
